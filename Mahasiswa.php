@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit ('No direct script access allowed');
 
-class Mahasiswa extends CI_Controller {
+class Matakuliah extends CI_Controller {
 
     function __construct()
     {
@@ -8,39 +8,39 @@ class Mahasiswa extends CI_Controller {
         $this->load->database();
         $this->load->helper('url');
         $this->load->helper('form');
-        $this->load->model('Mahasiswa_model');
+        $this->load->model('Matakuliah_model');
     }
 
     public function index()
     {
-        $data['mhs'] = $this->Mahasiswa_model->retrieve();
-        $this->load->view('Mahasiswa_view', $data);
+        $data['matakuliah'] = $this->Matakuliah_model->retrieve();
+        $this->load->view('Matakuliah_view', $data);
     }
 
     public function form_tambah()
     {
-        $this->load->view('Tambah_view');
+        $this->load->view('Tambah_view_matakuliah');
     }
 
     public function submit()
     {
-        $this->Mahasiswa_model->add($this->input->post('var'));
+        $this->Matakuliah_model->add($this->input->post('var'));
         $data['submitted'] = TRUE ;
-        $this->load->view('Tambah_view', $data);
+        $this->load->view('Tambah_view_matakuliah', $data);
     }
     function delete()
     {
-        $this->Mahasiswa_model->delete($this->uri->rsegment(3));
+        $this->Matakuliah_model->delete($this->uri->rsegment(3));
         $this->index();
     }
     function form_update()
     {
-        $data['mhs'] = $this->Mahasiswa_model->getMahasiswa($this->uri->rsegment(3));
-        $this->load->view('Update_view', $data);
+        $data['matakuliah'] = $this->Matakuliah_model->getMatakuliah($this->uri->rsegment(3));
+        $this->load->view('Update_view_matakuliah', $data);
     }
     function update()
     {
-        $this->Mahasiswa_model->update($this->input->post('old_nim'),
+        $this->Matakuliah_model->update($this->input->post('old_kd_mtk'),
                                         $this->input->post('var'));
         $this->index();
     }
